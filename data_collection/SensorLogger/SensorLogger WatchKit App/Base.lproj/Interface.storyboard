@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="21507" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch38"/>
+    <dependencies>
+        <deployment identifier="watchOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="21501"/>
+    </dependencies>
+    <scenes>
+        <!--Interface Controller-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="SensorLogger_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <label alignment="left" text="Participant ID" id="lkP-X6-hKN"/>
+                        <label height="20" alignment="left" text="Session ID" id="uXf-Wk-TQ4"/>
+                        <label alignment="left" text="Not Recording" id="RWt-jj-Zux"/>
+                        <button width="1" alignment="left" title="Start" id="ZgU-hh-LAu">
+                            <connections>
+                                <action selector="startButtonPressed" destination="AgC-eL-Hgc" id="tuD-GU-p21"/>
+                            </connections>
+                        </button>
+                        <button width="1" alignment="left" title="Stop" id="GcB-Hi-QKZ">
+                            <connections>
+                                <action selector="stopButtonPressed" destination="AgC-eL-Hgc" id="XwU-ka-FVg"/>
+                            </connections>
+                        </button>
+                        <button width="1" alignment="left" title="Audio Share" id="Aq4-ou-3Yy">
+                            <connections>
+                                <action selector="shareButtonPressed" destination="AgC-eL-Hgc" id="Bk6-1o-ILM"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="pIDLabel" destination="lkP-X6-hKN" id="S9a-Hz-Adh"/>
+                        <outlet property="recordingLabel" destination="RWt-jj-Zux" id="ieA-d9-hxL"/>
+                        <outlet property="sIDLabel" destination="uXf-Wk-TQ4" id="Nxx-uz-uVf"/>
+                        <outlet property="shareButton" destination="Aq4-ou-3Yy" id="ISR-Wa-09F"/>
+                        <outlet property="startButton" destination="ZgU-hh-LAu" id="F3N-Nk-pyc"/>
+                        <outlet property="stopButton" destination="GcB-Hi-QKZ" id="liF-J5-oMq"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-17" y="-6.5"/>
+        </scene>
+    </scenes>
+</document>
