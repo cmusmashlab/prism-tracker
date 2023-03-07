@@ -78,3 +78,20 @@ def get_times_and_labels(df):
     times = list(times / 2)  # watched video on half speed
     tasks = list(df['Task'][1:])
     return (times, tasks)
+
+
+def overwrite_other_labels(labels):
+    """
+    Overwrite 'Other' labels by their previous label.
+    Make sure to remove 'Other' in the beginning and ending before applying this function.
+    """
+    output = []
+    assert labels[0] != 'Other'
+    prev = labels[0]
+    for label in labels:
+        if label != 'Other':
+            output.append(label)
+            prev = label
+        else:
+            output.append(prev)
+    return output

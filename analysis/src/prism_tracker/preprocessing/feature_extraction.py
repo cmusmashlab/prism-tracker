@@ -6,7 +6,7 @@ from tensorflow.keras.models import Model, load_model
 
 from .. import config
 from . import params
-from .annotation import get_times_and_labels
+from .annotation import get_times_and_labels, overwrite_other_labels
 from .audio import get_audio_examples
 from .motion import get_motion_examples
 
@@ -127,7 +127,7 @@ def create_feature_pkl(pid, annotations, path_to_original,
     dataset = {
         'IMU': imu_feat,
         'audio': audio_feat,
-        'labels': strip_labels,
+        'labels': overwrite_other_labels(strip_labels),
         'timestamp': new_times
     }
 
