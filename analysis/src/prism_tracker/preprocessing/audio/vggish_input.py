@@ -35,15 +35,8 @@ def wavfile_to_examples(
     # print("log mel shape", log_mel.shape)
     # Frame features into examples.
     features_sample_rate = 1.0 / params.STFT_HOP_LENGTH_SECONDS
-    example_window_length = int(
-        round(
-            params.EXAMPLE_WINDOW_SECONDS *
-            features_sample_rate))  # 96
-    example_hop_length = int(
-        round(
-            params.EXAMPLE_HOP_SECONDS *
-            features_sample_rate))
-    # print(f'{example_window_length=}, {example_hop_length=}')
+    example_window_length = int(round(params.EXAMPLE_WINDOW_SECONDS * features_sample_rate))  # 96
+    example_hop_length = int(round(params.EXAMPLE_HOP_SECONDS * features_sample_rate))
     log_mel_examples = mel_features.frame(
         log_mel,
         window_length=example_window_length,

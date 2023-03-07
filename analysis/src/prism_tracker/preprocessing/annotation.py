@@ -1,52 +1,37 @@
-import os
-
-import numpy as np
 import pandas as pd
 
 
-def load_annotations_dict(path_to_original):
+def load_annotations_dict(original_dir):
     """
-    load annotations for the espresso task
+    Load annotations for the task
     """
-    userdfs = dict()
-    espresso = path_to_original / "espresso.csv"
-    df = pd.read_csv(str(espresso))
+    df = pd.read_csv(original_dir / 'annotation.csv')
 
     # fill NaNs with last seen values -> results in the participant id being
     # filled
-    df.ffill(inplace=True)  # fill participant
+    df.ffill(inplace=True)
 
-    for user in df["Participant"].unique():
+    userdfs = {}
+    for user in df['Participant'].unique():
         userdf = df.loc[df['Participant'] == user]
         userdf.reset_index(drop=True)
         userdfs[user] = userdf
     return userdfs
 
 
-def check_processed(path_to_processed):
+def load_classes_dict(original_dir):
     """
-    Check which PIDs are already processed
+    Load the list of classes for the task.
     """
-    processed = []
-    for filename in sorted(os.listdir(path_to_processed)):
-        pid = filename[:-4]
-        processed.append(pid)
-    return processed
-
-
-def get_classes_dict(path_to_original):
-    """
-    Get the list of classes for the espresso task
-    """
-    path = path_to_original / "classes.txt"
-    f = open(str(path), "r")
+    path = original_dir / 'classes.txt'
+    f = open(str(path), 'r')
     class_dict = {}
     for line in f.readlines():
         line = line.strip()
-        div = line.split(",")
+        div = line.split(',')
         if len(div) == 1:
             label = div[0].strip()
-            lab = label.split(" - ")
+            lab = label.split(' - ')
             class_dict[label] = lab[-1]
         else:
             label, c = div
@@ -56,31 +41,40 @@ def get_classes_dict(path_to_original):
     return class_dict
 
 
-def get_clap_times(path_to_original):
+def load_clap_times(original_dir):
     """
-    clap times is a dict that maps from PID to clap time in ms
+    Load a dict from csv that maps from PID to clap time in ms.
     """
-    path = path_to_original / "clap_times.csv"
-    f = open(str(path), "r")
+    path = original_dir / 'clap_times.csv'
+    f = open(path, 'r')
     _ = f.readline()
     clap_dict = {}
     for line in f.readlines():
-        pid, time = line.strip().split(",")
+        pid, time = line.strip().split(',')
         clap_dict[pid] = time.strip()
     return clap_dict
 
 
-def get_participant_labels(df):
+def load_processed(processed_dir):
     """
-    get the labels for the participant_name
+    Load which PIDs are already processed.
     """
-    n = len(df) - 1
-    times = np.zeros(n)
+    processed = []
+    for fp in processed_dir.iterdir():
+        pid = fp.stem
+        processed.append(pid)
+    return processed
+
+
+def get_times_and_labels(df):
+    """
+    Get the times and labels for the given df.
+    """
     # timestamp[0] is always the header
     # timestamp[1] is always the clap timestamp (that's how it was designed in
     # the tool 3..2..1..clap)
-    times = (df.iloc[1:]["Timestamp"] - df.iloc[1]
-             ["Timestamp"])  # relative from clap
+    times = (df.iloc[1:]['Timestamp'] - df.iloc[1]
+             ['Timestamp'])  # relative from clap
     times = list(times / 2)  # watched video on half speed
-    tasks = list(df["Task"][1:])
+    tasks = list(df['Task'][1:])
     return (times, tasks)
