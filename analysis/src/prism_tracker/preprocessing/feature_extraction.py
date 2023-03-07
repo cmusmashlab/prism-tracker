@@ -11,8 +11,8 @@ from .audio import get_audio_examples
 from .motion import get_motion_examples
 
 
-def build_sound_only_model():
-    path_to_model = config.datadrive / 'pretrained_models/sound_model.h5'
+def build_audio_only_model():
+    path_to_model = config.datadrive / 'pretrained_models/audio_model.h5'
     ubicoustics_model = load_model(path_to_model)
     fc2_op = ubicoustics_model.get_layer('fc2').output
     final_model = Model(
@@ -63,7 +63,7 @@ def normalize_motion(motion, norm_params):
 
 
 def create_feature_pkl(pid, annotations, path_to_original,
-                       class_dict, sound_model, motion_model):
+                       class_dict, audio_model, motion_model):
     times, tasks = get_times_and_labels(annotations[pid])
 
     # load data
@@ -121,7 +121,7 @@ def create_feature_pkl(pid, annotations, path_to_original,
     audio, imu, strip_labels, new_times = clean_tasks(
         windowed_arr_audio, windowed_arr_imu, labels, relative_times)
 
-    audio_feat = np.array(sound_model([audio]))
+    audio_feat = np.array(audio_model([audio]))
     imu_feat = np.array(motion_model([imu]))
 
     dataset = {

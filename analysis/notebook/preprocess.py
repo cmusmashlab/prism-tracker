@@ -7,7 +7,7 @@ from prism_tracker.preprocessing.annotation import (load_annotations_dict,
                                                     load_processed)
 from prism_tracker.preprocessing.audio import preprocess_audio
 from prism_tracker.preprocessing.feature_extraction import (
-    build_motion_only_model, build_sound_only_model, create_feature_pkl)
+    build_motion_only_model, build_audio_only_model, create_feature_pkl)
 from prism_tracker.preprocessing.motion import preprocess_motion
 
 root_path = config.datadrive / 'tasks' / 'latte_making'
@@ -23,6 +23,7 @@ clap_dict = load_clap_times(path_to_original)
 # check if we've already processed these participants -> returns a list of
 # participants that are done
 done = load_processed(path_to_preprocessed)
+done = [p for p in done if 'kiyosu' not in p]
 # done = []
 print('done file: ', done)
 
@@ -50,7 +51,7 @@ for fpath in raw_audio_dir.iterdir():
     processed.append(participant_name)
 
 print('newly preprocessed: ', processed)
-sound_model = build_sound_only_model()
+audio_model = build_audio_only_model()
 imu_model = build_motion_only_model()
 
 for pid in processed:
@@ -60,7 +61,7 @@ for pid in processed:
             annotations,
             path_to_original,
             classes_dict,
-            sound_model,
+            audio_model,
             imu_model)
         with open(path_to_preprocessed / f'{pid}.pkl', 'wb') as f:
             pkl.dump(dataset, f)
