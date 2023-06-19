@@ -1,13 +1,13 @@
 import pickle as pkl
 
 from prism_tracker import config
-from prism_tracker.preprocessing.annotation import (load_annotations_dict,
-                                                    load_clap_times,
-                                                    load_classes_dict,
-                                                    load_processed)
+from prism_tracker.preprocessing.annotation import (
+    load_annotations_dict, load_clap_times, load_classes_dict, load_processed,
+)
 from prism_tracker.preprocessing.audio import preprocess_audio
 from prism_tracker.preprocessing.feature_extraction import (
-    build_motion_only_model, build_audio_only_model, create_feature_pkl)
+    build_audio_only_model, build_motion_only_model, create_feature_pkl,
+)
 from prism_tracker.preprocessing.motion import preprocess_motion
 
 root_path = config.datadrive / 'tasks' / 'latte_making'
@@ -23,7 +23,6 @@ clap_dict = load_clap_times(dataset_dir)
 # check if we've already processed these participants -> returns a list of
 # participants that are done
 done = load_processed(preprocessed_dir)
-# done = []
 print('done file: ', done)
 
 processed = []

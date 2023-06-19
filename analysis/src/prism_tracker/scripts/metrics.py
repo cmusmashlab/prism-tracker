@@ -1,7 +1,9 @@
 from typing import List, Optional, Tuple
 
 import matplotlib.axes
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, ConfusionMatrixDisplay
+from sklearn.metrics import (
+    ConfusionMatrixDisplay, accuracy_score, confusion_matrix, f1_score, precision_score, recall_score,
+)
 
 
 def frame_level_metrics(y_true_series: List[int], y_pred_series: List[int], num_classes: int,

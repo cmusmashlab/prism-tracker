@@ -11,7 +11,7 @@ from sklearn.metrics import confusion_matrix
 from ..config import datadrive
 
 
-@functools.cache
+@functools.lru_cache(maxsize=None)
 def load_pickle(pickle_path: Union[str, pathlib.Path]):
     with open(pickle_path, 'rb') as pickle_fp:
         return pickle.load(pickle_fp)

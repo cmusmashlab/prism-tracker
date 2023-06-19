@@ -1,11 +1,9 @@
-from typing import Optional, List, Dict, Tuple, Iterable, Any, Iterator
+from typing import Dict, Iterable, Iterator, List, Optional, Tuple
 
 import numpy as np
-import numpy.typing as npt
 from scipy import stats
 
-
-from .collections import ViterbiEntry, HiddenState, HiddenTransition, Graph
+from .collections import Graph, HiddenState, HiddenTransition, ViterbiEntry
 from .params import MAX_TIME
 
 

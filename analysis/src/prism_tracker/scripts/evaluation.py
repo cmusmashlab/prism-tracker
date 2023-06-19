@@ -6,7 +6,7 @@ import os
 import pathlib
 import pickle
 import warnings
-from typing import List, Union, Optional, Tuple, Dict
+from typing import Dict, List, Optional, Tuple, Union
 
 import numpy as np
 import numpy.typing as npt
@@ -14,7 +14,7 @@ from sklearn.model_selection import LeaveOneOut, train_test_split
 
 from ..tracker.collections import Graph
 from ..tracker.viterbi import ViterbiTracker
-from .classifier import train_classifier, obtain_confusion_probabilities
+from .classifier import obtain_confusion_probabilities, train_classifier
 
 
 def load_imu_and_audio_data(pickle_files: List[Union[str, pathlib.Path]],

@@ -1,11 +1,11 @@
 import itertools
 import pathlib
 import pickle
-from typing import Union, List
+from typing import List, Union
 
 import numpy as np
 
-from ..tracker.collections import Step, Graph
+from ..tracker.collections import Graph, Step
 
 
 def build_graph(pickle_files: List[Union[str, pathlib.Path]], steps: List[str]) -> Graph:
@@ -48,4 +48,4 @@ def build_graph(pickle_files: List[Union[str, pathlib.Path]], steps: List[str]) 
         for next_step_index in np.nonzero(transition_graph[s.index])[0]:
             edge_dict[s][step_list[next_step_index]] = transition_graph[s.index][next_step_index] / total
 
-    return Graph(steps = step_list, edges = edge_dict)
+    return Graph(steps=step_list, edges=edge_dict)
