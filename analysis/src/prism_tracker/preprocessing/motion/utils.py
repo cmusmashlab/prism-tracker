@@ -44,7 +44,7 @@ def preprocess_motion(participant_name, original_dir, clap_dict):
     """
 
     raw_fp = original_dir / 'motion' / 'raw' / \
-        f'{participant_name}-realtime.txt'
+        f'{participant_name}.txt'
 
     sensor_columns = ['unix_time', 'data.userAcceleration.x', 'data.userAcceleration.y', 'data.userAcceleration.z',
                       'data.gravity.x', 'data.gravity.y', 'data.gravity.z',
