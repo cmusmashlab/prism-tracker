@@ -1,6 +1,15 @@
-# prism-tracker
+# Research Code for PrISM-Tracker
+![Screen Shot 2023-06-19 at 2 50 50 PM](https://github.com/cmusmashlab/prism-tracker/assets/12772049/1488460b-83ce-4f48-9ed9-995a1c2f1ca2)
+
 
 This is the research repository for [PrISM-Tracker: A Framework for Multimodal Procedure Tracking Using Wearable Sensors and State Transition Information with User-Driven Handling of Errors and Uncertainty](https://dl.acm.org/doi/pdf/10.1145/3569504), published at IMWUT 2022.
+
+# Repository Structure
+- analysis
+    - Python-based code to preprocess audio + motion data, apply human activity recognition (HAR), apply our viterbi algorithm, and simulate human-in-the-loop prompting.
+- data collection
+    - Swift-based code for the iPhone + Apple Watch app we used to collect data. This can be reused to create a new dataset on our framework.
+    - Link to the annotation app.
 
 # Reference
 
