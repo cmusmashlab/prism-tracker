@@ -139,7 +139,7 @@ class ViterbiTracker:
         This function is used for predicting the steps of a procedure using the complete observation data.
 
         Args:
-        * observations (npt.NDArray[(Any, Any), float]): a numpy array containing the observation probabilities with dimensions representing the steps and time frames.
+        * observations (List[List[float]]): a numpy array containing the observation probabilities with dimensions representing the steps and time frames.
         * confusion_matrix (List[List[float]]): a matrix containing the confusion probabilities between each step in a procedure.
         * oracle (Optional[Dict[int, List[int]]]): an optional dictionary where the keys are the step indices and the values are lists of the correct transition time frames of each step.
 
