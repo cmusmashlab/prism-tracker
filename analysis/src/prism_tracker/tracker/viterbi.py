@@ -113,7 +113,7 @@ class ViterbiTracker:
                     elif oracle_next_step != transition.next_step_index:  # the next step should be a different one
                         continue
                 elif curr_state_index != transition.next_step_index and \
-                        transition.next_step_index in oracle_prohibited_steps:  # cannot transit now
+                        transition.next_step_index in (oracle_prohibited_steps or []):  # cannot transit now
                     continue
 
                 prob = curr_entry.probability + transition.probability + observed_probs[transition.next_step_index]

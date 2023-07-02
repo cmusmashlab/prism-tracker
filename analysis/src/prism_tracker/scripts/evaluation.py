@@ -125,7 +125,7 @@ def perform_loo(graph: Graph, pickle_files: List[Union[str, pathlib.Path]], step
     This function performs a leave-one-out evaluation of with a provided set of input data.
 
     Args:
-    * graph (Graph): A graph object with a list of step objects and a dictionary containing transition probabilities.
+    * graph (Graph): a graph object with a list of step objects and a dictionary containing transition probabilities.
     * pickle_files (List[Union[str, pathlib.Path]]): a list of the paths to the pickle files containing the input data.
     * steps (List[str]): a list of strings representing the steps in the process.
     * start_step_indices (Optional[List[int]]): a list of integers representing the indices of the starting step.
