@@ -7,6 +7,7 @@ import numpy as np
 # time series vector
 def frame(data, window_length, hop_length):
     if data.shape[0] < window_length:
+        print('padding with zero')
         # pad zeros
         len_pad = int(np.ceil(window_length)) - data.shape[0]
         to_pad = np.zeros((len_pad, ) + data.shape[1:])

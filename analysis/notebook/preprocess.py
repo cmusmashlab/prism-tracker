@@ -10,7 +10,12 @@ from prism_tracker.preprocessing.feature_extraction import (
 )
 from prism_tracker.preprocessing.motion import preprocess_motion
 
-root_path = config.datadrive / 'tasks' / 'latte_making'
+task_name = 'cooking'
+half = {
+    'cooking': False,
+    'latte_making': True,
+}[task_name]  # whether the annotation time is half speed or not
+root_path = config.datadrive / 'tasks' / task_name
 dataset_dir = root_path / 'dataset'
 preprocessed_dir = root_path / 'preprocessed'
 preprocessed_dir.mkdir(exist_ok=True, parents=True)
@@ -23,6 +28,8 @@ clap_dict = load_clap_times(dataset_dir)
 # check if we've already processed these participants -> returns a list of
 # participants that are done
 done = load_processed(preprocessed_dir)
+# done = done[2:]
+#done = []
 print('done file: ', done)
 
 processed = []
@@ -53,15 +60,12 @@ audio_model = build_audio_only_model()
 imu_model = build_motion_only_model()
 
 for pid in processed:
-    try:
-        dataset = create_feature_pkl(
+    dataset = create_feature_pkl(
             pid,
             annotations,
             dataset_dir,
             classes_dict,
             audio_model,
-            imu_model)
-        with open(preprocessed_dir / f'{pid}.pkl', 'wb') as f:
-            pkl.dump(dataset, f)
-    except BaseException as e:
-        print(f'Error in creating feature for {pid}: ', e)
+            imu_model, half=half)
+    with open(preprocessed_dir / f'{pid}.pkl', 'wb') as f:
+        pkl.dump(dataset, f)

@@ -30,18 +30,16 @@ def wavfile_to_examples(
                                                num_mel_bins=params.NUM_MEL_BINS,
                                                lower_edge_hertz=lower_edge_hertz,
                                                upper_edge_hertz=upper_edge_hertz)
-
     # (16552, 64)   16552 timestamps* 30ms /60/1000 = 8.276 minutes
     # print("log mel shape", log_mel.shape)
     # Frame features into examples.
     features_sample_rate = 1.0 / params.STFT_HOP_LENGTH_SECONDS
     example_window_length = int(round(params.EXAMPLE_WINDOW_SECONDS * features_sample_rate))  # 96
-    example_hop_length = int(round(params.EXAMPLE_HOP_SECONDS * features_sample_rate))
+    example_hop_length = int(round(params.EXAMPLE_HOP_SECONDS * features_sample_rate))  # 7
     log_mel_examples = mel_features.frame(
         log_mel,
         window_length=example_window_length,
         hop_length=example_hop_length)
-
-    # (16457, 96, 64)
-    # print(log_mel_examples.shape)
+    #print(len(data), len(log_mel), len(log_mel_examples))
+    #print(len(data) / 16000, params.STFT_WINDOW_LENGTH_SECONDS + len(log_mel) * params.STFT_HOP_LENGTH_SECONDS, params.EXAMPLE_WINDOW_SECONDS + len(log_mel_examples) * params.EXAMPLE_HOP_SECONDS)
     return log_mel_examples
