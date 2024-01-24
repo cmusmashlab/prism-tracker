@@ -63,11 +63,11 @@ def normalize_motion(motion, norm_params):
 
 
 def create_feature_pkl(pid, annotations, path_to_original,
-                       class_dict, audio_model, motion_model):
-    times, tasks = get_times_and_labels(annotations[pid])
-
+                       class_dict, audio_model, motion_model, half=False):
     # load data
     print(f"\n----Create feature pkl for {pid}----")
+    times, tasks = get_times_and_labels(annotations[pid], half)
+
     audio_file_path = path_to_original / \
         'audio' / 'preprocessed' / f'{pid}.wav'
     motion_file_path = path_to_original / \
@@ -105,13 +105,15 @@ def create_feature_pkl(pid, annotations, path_to_original,
         # get the timestamp from the motion data
         last_frame_index_motion_example = int(imu_example_index * params.HOP_LENGTH_IMU + params.WINDOW_LENGTH_IMU)
         ms = motion_df['timestamp'][last_frame_index_motion_example]
+
         try:
             label = get_label(ms, times, tasks, class_dict)
             labels.append(label)
             relative_times.append(end_audio_sec * 1000)
             windowed_data_imu.append(imu)
             windowed_data_audio.append(audio_examples[i])
-        except BaseException:
+        except BaseException as e:
+            print(e)
             continue  # remove REMOVE class label
 
     windowed_arr_audio = np.array(windowed_data_audio)

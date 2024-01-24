@@ -66,16 +66,20 @@ def load_processed(processed_dir):
     return processed
 
 
-def get_times_and_labels(df):
+def get_times_and_labels(df, half=False):
     """
     Get the times and labels for the given df.
+    If annotated by watching a video with 0.5x speed, `half` should be True.
     """
     # timestamp[0] is always the header
     # timestamp[1] is always the clap timestamp (that's how it was designed in
     # the tool 3..2..1..clap)
     times = (df.iloc[1:]['Timestamp'] - df.iloc[1]
              ['Timestamp'])  # relative from clap
-    times = list(times / 2)  # watched video on half speed
+    if half:
+        times = list(times / 2)  # watched video on half speed
+    else:
+        times = list(times)
     tasks = list(df['Task'][1:])
     return (times, tasks)
 
