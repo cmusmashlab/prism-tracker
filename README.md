@@ -47,5 +47,5 @@ Riku Arakawa, Hiromu Yakura, Vimal Mollyn, Suzanne Nie, Emma Russell, Dustin Dem
 
 # License
 
-PrISM-Tracker is freely available for free non-commercial use, and may be redistributed under these conditions. Please, see the license for further details.
+This repository is published under MIT license.
 Please contact innovation@cmu.edu if you would like another license for your use.
