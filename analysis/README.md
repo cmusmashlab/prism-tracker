@@ -46,9 +46,10 @@ datadrive
           └───preprocessed (will be generated)
 ```
 
-Download the required files (model + latte_making dataset) from the following links:
+Download the required files from the following links:
 - pretrained_models: https://www.dropbox.com/sh/w3lo0f1k6w90b5w/AADuoDVSKuY9kQSPx2RRGJ_Ma?dl=0
 - dataset: https://www.dropbox.com/sh/93jd6elugxgvm6k/AACL3XGiP8-UXPKIWK-h9Ud1a?dl=0
+    - latte-making and cooking tasks are available
 
 **You can also create your own dataset by [our data collection app](https://github.com/cmusmashlab/prism-tracker/tree/main/data_collection/SensorLogger).
 Please get in touch with us (rarakawa@cs.cmu.edu) for more details.**
